@@ -1,9 +1,5 @@
 ﻿using Autofac;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Geomio.Shapes;
 
 namespace Geomio
 {
@@ -14,7 +10,7 @@ namespace Geomio
         static Container()
         {
             var builder = new ContainerBuilder();
-            
+
             builder.RegisterInstance(new Circle(100)).As<IShape>();
             builder.RegisterInstance(new Square(100, 100)).As<IShape>();
             builder.RegisterInstance(new Triangle(100, 100, 100)).As<IShape>();
