@@ -127,13 +127,28 @@ namespace Geomio
 
     public class Calc
     {
-        private readonly List<IShape> _shapes;
+        private readonly IEnumerable<IShape> _shapes;
         public Calc(IEnumerable<IShape> shapes)
         {
-            _shapes = shapes.ToList();
+            _shapes = shapes;
         }
 
-        public void Print() => _shapes.ForEach((s) => Console.WriteLine($"Shape:{s.GetType().Name} Area:{s.CalcArea()} Perimeter:{s.CalcPerimeter()}"));
-        public void Print<T>() where T : IShape => _shapes.OfType<T>().ToList().ForEach((s) => Console.WriteLine($"Shape:{s.GetType().Name} Area:{s.CalcArea()} Perimeter:{s.CalcPerimeter()}"));
+        public void Print()
+        {
+            foreach (IShape shape in _shapes)
+            {
+                print(shape);
+            }
+        }
+
+        public void Print<T>() where T : IShape
+        {
+            foreach(IShape shape in _shapes.OfType<T>())
+            {
+               print(shape);
+            }
+        }
+            
+        private void print(IShape shape) => Console.WriteLine($"Shape:{shape.GetType().Name} Area:{shape.CalcArea()} Perimeter:{shape.CalcPerimeter()}");
     }
 }
