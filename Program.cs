@@ -4,10 +4,17 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            var calc = Container.Calculator;
         }
     }
-    public abstract class Shape
+
+    public interface IShape
+    {
+        abstract double CalcArea();
+        abstract double CalcPerimeter();
+    }
+
+    public abstract class Shape: IShape
     {
         public abstract double CalcArea();
         public abstract double CalcPerimeter();
@@ -110,6 +117,15 @@
             }
 
             return perimeter;
+        }
+    }
+
+    public class Calc
+    {
+        private readonly IReadOnlyList<IShape> _shapes;
+        public Calc(IEnumerable<IShape> shapes)
+        {
+            _shapes = shapes.ToList();
         }
     }
 }
