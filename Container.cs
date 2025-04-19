@@ -18,6 +18,7 @@ namespace Geomio
             builder.RegisterInstance(new Circle(100)).As<IShape>();
             builder.RegisterInstance(new Square(100, 100)).As<IShape>();
             builder.RegisterInstance(new Triangle(100, 100, 100)).As<IShape>();
+            builder.RegisterInstance(new Polygon(new List<(double X, double Y)> { (0, 0), (0, 100), (100, 0) })).As<IShape>();
 
             builder.RegisterType<Calc>();
 
