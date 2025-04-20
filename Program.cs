@@ -1,4 +1,6 @@
 ﻿using System.Text;
+using Autofac;
+using Geomio.Calculator;
 using Geomio.Shapes;
 
 namespace Geomio
@@ -7,9 +9,8 @@ namespace Geomio
     {
         static void Main(string[] args)
         {
-            var calc = Container.Calculator;
-            calc.Print();
-            calc.Print<Circle>();
+            Container.Calc.Print();
+            Container.Calc.Print<Circle>();
         }
     }                   
 }

@@ -3,23 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Geomio.Print;
+using Geomio.Shapes;
 
-namespace Geomio
+namespace Geomio.Calculator
 {
-    public class Calc
+    public class Calc : ICalc
     {
         private readonly IEnumerable<IShape> _shapes;
+        private readonly IPrinter _printer;
 
-        public Calc(IEnumerable<IShape> shapes)
+        public Calc(IEnumerable<IShape> shapes, IPrinter printer)
         {
             _shapes = shapes;
+            _printer = printer;
         }
 
         public void Print()
         {
             foreach (IShape shape in _shapes)
             {
-                print(shape);
+                _printer.Print(shape);
             }
         }
 
@@ -27,7 +31,7 @@ namespace Geomio
         {
             foreach (IShape shape in _shapes.OfType<T>())
             {
-                print(shape);
+                _printer.Print(shape);
             }
         }
 
@@ -38,7 +42,5 @@ namespace Geomio
         public double Perimeter() => _shapes.Sum((s) => s.CalcPerimeter());
 
         public double Perimeter<T>() where T : IShape => _shapes.OfType<T>().Sum((s) => s.CalcPerimeter());
-
-        private void print(IShape shape) => Console.WriteLine($"Shape:{shape.GetType().Name} Area:{shape.CalcArea()} Perimeter:{shape.CalcPerimeter()}");
     }
 }
